@@ -1,3 +1,9 @@
+server:
+  port: 8082
 spring:
   application:
-    name: ms-core
+    name: core
+
+springdoc:
+  swagger-ui:
+    path: /swagger
