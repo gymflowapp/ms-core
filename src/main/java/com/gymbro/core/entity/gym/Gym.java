@@ -45,7 +45,7 @@ public class Gym {
     @Column(name = "logo_url", length = 500)
     private String logoUrl;
 
-    @Column(name = "branding_colors", length = 200)
+    @Column(name = "branding_colors", length = 9)
     private String brandingColors;
 
     @Enumerated(EnumType.STRING)
