@@ -17,6 +17,10 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
 
+gym:
+  crypto:
+    secret-key: 123456789
+
 springdoc:
   swagger-ui:
     path: /swagger
