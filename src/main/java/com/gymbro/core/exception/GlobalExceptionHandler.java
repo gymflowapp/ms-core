@@ -1,5 +1,7 @@
 package com.gymbro.core.exception;
 
+import static com.gymbro.core.constants.AppConstants.Validation.INVALID_REQUEST;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -28,7 +30,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new LinkedHashMap<>();
         exception.getBindingResult().getFieldErrors()
                 .forEach(error -> errors.putIfAbsent(error.getField(), error.getDefaultMessage()));
-        return build(HttpStatus.BAD_REQUEST, "La solicitud contiene datos inválidos", errors);
+        return build(HttpStatus.BAD_REQUEST, INVALID_REQUEST, errors);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

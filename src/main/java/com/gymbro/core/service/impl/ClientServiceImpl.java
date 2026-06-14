@@ -1,5 +1,12 @@
 package com.gymbro.core.service.impl;
 
+import static com.gymbro.core.constants.AppConstants.Client.CLIENT_NOT_FOUND;
+import static com.gymbro.core.constants.AppConstants.Client.DOCUMENT_ALREADY_EXISTS;
+import static com.gymbro.core.constants.AppConstants.Client.DOCUMENT_TYPE_NOT_FOUND;
+import static com.gymbro.core.constants.AppConstants.Client.GENDER_NOT_FOUND;
+import static com.gymbro.core.constants.AppConstants.Client.GYM_NOT_FOUND;
+import static com.gymbro.core.constants.AppConstants.Client.INVALID_GYM_TOKEN;
+
 import com.gymbro.common.security.GymTokenService;
 import com.gymbro.core.dto.request.ClientRequest;
 import com.gymbro.core.dto.response.ClientResponse;
@@ -104,29 +111,29 @@ public class ClientServiceImpl implements ClientService {
         try {
             return gymTokenService.decryptGymId(gymToken);
         } catch (RuntimeException exception) {
-            throw new IllegalArgumentException("El token del gimnasio no es válido");
+            throw new IllegalArgumentException(INVALID_GYM_TOKEN);
         }
     }
 
     private Gym findGym(Long gymId) {
         return gymRepository.findById(gymId)
                 .filter(gym -> Boolean.TRUE.equals(gym.getActive()))
-                .orElseThrow(() -> new ResourceNotFoundException("Gimnasio no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException(GYM_NOT_FOUND));
     }
 
     private Clients findClient(Long gymId, Long clientId) {
         return clientRepository.findByIdAndGymId(clientId, gymId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException(CLIENT_NOT_FOUND));
     }
 
     private DocumentType findDocumentType(Long id) {
         return documentTypeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Tipo de documento no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException(DOCUMENT_TYPE_NOT_FOUND));
     }
 
     private Genders findGender(Long id) {
         return genderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Género no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException(GENDER_NOT_FOUND));
     }
 
     private void validateUniqueDocument(Long gymId, String documentNumber, Long clientId) {
@@ -138,7 +145,7 @@ public class ClientServiceImpl implements ClientService {
                         clientId
                 );
         if (exists) {
-            throw new ConflictException("Ya existe un cliente con ese documento en el gimnasio");
+            throw new ConflictException(DOCUMENT_ALREADY_EXISTS);
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.gymbro.core.service.impl;
 
 import com.gymbro.common.security.GymTokenService;
-import com.gymbro.core.dto.client.request.ClientRequest;
+import com.gymbro.core.dto.request.ClientRequest;
 import com.gymbro.core.entity.Clients;
 import com.gymbro.core.entity.Gym;
 import com.gymbro.core.exception.ConflictException;
