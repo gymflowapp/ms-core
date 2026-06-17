@@ -21,6 +21,7 @@ public final class AppConstants {
     public static final class Gym {
 
         public static final String NOT_FOUND = "Gimnasio no encontrado";
+        public static final String NAME_ALREADY_EXISTS = "Ya existe un gimnasio con ese nombre";
         public static final String NAME_REQUIRED = "El nombre del gimnasio es obligatorio";
         public static final String NAME_MAX_LENGTH = "El nombre no puede superar 255 caracteres";
         public static final String PLAN_REQUIRED = "El plan es obligatorio";
